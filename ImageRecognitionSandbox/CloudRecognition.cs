@@ -37,8 +37,8 @@ namespace Brady.ImageRecognition
 
 			using (MD5 md5Hash = MD5.Create())
 			{
-				string body = CreateBoundaryBody(image);
-				_hexDigest = CreateMD5HashString(md5Hash, Encoding.UTF8.GetBytes(body));
+				byte[] bodyBytes = CreateBoundaryBodyBytes(image);
+				_hexDigest = CreateMD5HashString(md5Hash, bodyBytes);
 				Console.Write($"md5 hash: {_hexDigest}\n");
 			}
 			request.Method = Method.POST;
@@ -87,16 +87,20 @@ namespace Brady.ImageRecognition
 			//return Convert.ToBase64String(hash);
 		}
 
-		string CreateBoundaryBody(byte[] data)
+		byte[] CreateBoundaryBodyBytes(byte[] data)
 		{
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(_boundary);
-			sb.AppendLine("Content-Disposition: form-data; name=\"image\"; filename=\"Y1159546.jpg\"\nContent-Type: image/jpeg");
-			sb.Append("\n");
-			sb.AppendLine(Encoding.UTF8.GetString(data));
-			sb.AppendLine(_boundary + "--");
+			List<byte> bytes = new List<byte>();
 
-			return sb.ToString();
+			StringBuilder sb = new StringBuilder();
+			sb.Append($"{_boundary}\r\n");
+			sb.Append("Content-Disposition: form-data; name=\"image\"; filename=\"Y1159546.jpg\"\r\nContent-Type: image/jpeg\r\n");
+			sb.Append("\r\n");
+			bytes.AddRange(Encoding.UTF8.GetBytes(sb.ToString()));
+			bytes.AddRange(data.ToList());
+
+			bytes.AddRange(Encoding.UTF8.GetBytes($"{_boundary}--\r\n").ToList());
+
+			return bytes.ToArray();
 		}
 	}
 }
