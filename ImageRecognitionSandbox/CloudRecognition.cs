@@ -14,9 +14,9 @@ namespace Brady.ImageRecognition
 		string _accessKey = "a9438f16283f0d17d6b8d7598526ca7742a1a102";
 		string _secretKey = "b7834db5fc8b71fca49f46751ef3ca53f7e0f17d";
 		string _hexDigest = "d41d8cd98f00b204e9800998ecf8427e"; // Hex digest of an empty string
-		string _contentType = "multipart/form-data; boundary=POOP";
+		string _contentType = "multipart/form-data";
 		string _cloudServicesUrl = "https://cloudreco.vuforia.com";
-
+		string _boundary = "----------------------------28947758029299";
 		string _imagePath = "Y1159546.jpg";
 
 		public string RequestMatch()
@@ -27,20 +27,18 @@ namespace Brady.ImageRecognition
 			var currentTimeString = GetCurrentUTCTimeString();
 			Console.Write($"Time: {currentTimeString}\n");
 
-			//List<byte> boundaryHash = Encoding.UTF8.GetBytes("POOP").ToList();
+
 			string imagePath = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Documents"), _imagePath);
 			byte[] image = File.ReadAllBytes(imagePath);
-			//boundaryHash.AddRange(image.ToList());
-			//boundaryHash.AddRange(Encoding.UTF8.GetBytes("POOP--").ToList());
+
 			request.AlwaysMultipartFormData = true;
 			request.AddFile("image", image, _imagePath, "image/jpeg");
-			request.AddParameter("POOP", image, ParameterType.GetOrPost);
 			request.RequestFormat = DataFormat.Json;
 
-			var body = request.Parameters.First(p => p.Type == ParameterType.GetOrPost);
 			using (MD5 md5Hash = MD5.Create())
 			{
-				_hexDigest = CreateMD5HashString(md5Hash, Encoding.UTF8.GetBytes(body.Value.ToString()));
+				string body = CreateBoundaryBody(image);
+				_hexDigest = CreateMD5HashString(md5Hash, Encoding.UTF8.GetBytes(body));
 				Console.Write($"md5 hash: {_hexDigest}\n");
 			}
 			request.Method = Method.POST;
@@ -87,6 +85,18 @@ namespace Brady.ImageRecognition
 
 			return sb.ToString().ToLowerInvariant();
 			//return Convert.ToBase64String(hash);
+		}
+
+		string CreateBoundaryBody(byte[] data)
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine(_boundary);
+			sb.AppendLine("Content-Disposition: form-data; name=\"image\"; filename=\"Y1159546.jpg\"\nContent-Type: image/jpeg");
+			sb.Append("\n");
+			sb.AppendLine(Encoding.UTF8.GetString(data));
+			sb.AppendLine(_boundary + "--");
+
+			return sb.ToString();
 		}
 	}
 }
