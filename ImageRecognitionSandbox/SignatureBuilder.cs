@@ -10,7 +10,7 @@ namespace Brady.ImageRecognition
 	public class SignatureBuilder
 	{
 		string _method = "POST";
-		string _contentType = "multipart/form-data";
+        string _contentType;
 		string _dateValue = "";
 		public string GetSignature(RestRequest request, string secretKey, string hexDigest)
 		{

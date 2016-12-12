@@ -14,10 +14,10 @@ namespace Brady.ImageRecognition
 		string _accessKey = "a9438f16283f0d17d6b8d7598526ca7742a1a102";
 		string _secretKey = "b7834db5fc8b71fca49f46751ef3ca53f7e0f17d";
 		string _hexDigest = "d41d8cd98f00b204e9800998ecf8427e"; // Hex digest of an empty string
-		string _contentType = "multipart/form-data";
 		string _cloudServicesUrl = "https://cloudreco.vuforia.com";
-		string _boundary = "----------------------------28947758029299";
-		string _imagePath = "Y1159546.jpg";
+		string _boundary = "-----------------------------28947758029299";
+		string _contentType = "multipart/form-data; boundary=-----------------------------28947758029299";
+        string _imagePath = "Y1159546.jpg";
 
 		public string RequestMatch()
 		{
@@ -91,14 +91,25 @@ namespace Brady.ImageRecognition
 		{
 			List<byte> bytes = new List<byte>();
 
+            string nl = "\r\n";
+
 			StringBuilder sb = new StringBuilder();
-			sb.Append($"{_boundary}\r\n");
-			sb.Append("Content-Disposition: form-data; name=\"image\"; filename=\"Y1159546.jpg\"\r\nContent-Type: image/jpeg\r\n");
-			sb.Append("\r\n");
-			bytes.AddRange(Encoding.UTF8.GetBytes(sb.ToString()));
+			sb.Append($"--{_boundary}{nl}");
+			sb.Append($"Content-Disposition: form-data; name=\"image\"; filename=\"Y1159546.jpg\"{nl}Content-Type: image/jpeg{nl}");
+			sb.Append($"{nl}");
+			bytes.AddRange(Encoding.ASCII.GetBytes(sb.ToString()));
 			bytes.AddRange(data.ToList());
 
-			bytes.AddRange(Encoding.UTF8.GetBytes($"{_boundary}--\r\n").ToList());
+			bytes.AddRange(Encoding.ASCII.GetBytes($"{nl}--{_boundary}--{nl}").ToList());
+
+
+
+			using (var file = File.Create("text.txt"))
+
+			{
+				new MemoryStream(bytes.ToArray()).CopyTo(file);
+				file.Flush();
+			}
 
 			return bytes.ToArray();
 		}
