@@ -1,0 +1,6 @@
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/bin/Debug/ImageRecognitionSandbox.exe.mdb
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/bin/Debug/ImageRecognitionSandbox.exe
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/obj/x86/Debug/ImageRecognitionSandbox.exe
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/obj/x86/Debug/ImageRecognitionSandbox.exe.mdb
+/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/bin/Debug/RestSharp.dll

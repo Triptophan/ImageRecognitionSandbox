@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{7829DB27-8A5B-47A7-8BCA-9A8B7ADEE274}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ImageRecognitionSandbox/CloudRecognition.cs">
+    <Files>
+      <File FileName="ImageRecognitionSandbox/SignatureBuilder.cs" Line="22" Column="1" />
+      <File FileName="ImageRecognitionSandbox/Program.cs" Line="13" Column="6" />
+      <File FileName="ImageRecognitionSandbox/CallTargets.cs" Line="33" Column="58" />
+      <File FileName="ImageRecognitionSandbox/CloudRecognition.cs" Line="41" Column="1" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/CallTargets.cs" relfile="ImageRecognitionSandbox/CallTargets.cs" line="39" column="1" />
+      <Breakpoint file="/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/CloudRecognition.cs" relfile="ImageRecognitionSandbox/CloudRecognition.cs" line="60" column="1" />
+      <Breakpoint file="/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/SignatureBuilder.cs" relfile="ImageRecognitionSandbox/SignatureBuilder.cs" line="22" column="1" />
+      <Breakpoint file="/Users/kohlerde/Projects/ImageRecognitionSandbox/ImageRecognitionSandbox/CloudRecognition.cs" relfile="ImageRecognitionSandbox/CloudRecognition.cs" line="41" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.ImageRecognitionSandbox PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
